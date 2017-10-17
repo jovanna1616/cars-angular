@@ -1,3 +1,21 @@
-<p>
-  cars works!
-</p>
+<div class="container">
+    <ul>
+        <li *ngFor="let car of cars">
+            <span>Car mark: {{ car.mark }}</span><br>
+            <span>Car model: {{ car.model }}</span><br>
+            <span>Car year: {{ car.year }}</span><br>
+            <span>Car max speed: {{ car.maxSpeed }}</span><br>
+            <span>is automatic: {{ car.isAutomatic }}</span><br>
+            <span>Car's engine: {{ car.engine }}</span><br>
+            <span>Number of doors: {{ car.numberOdDoors }}</span><br>
+            <hr>
+        </li>
+    </ul>
+</div>
+
+
+
+
+
+
+
