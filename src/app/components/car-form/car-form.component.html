@@ -1,0 +1,66 @@
+<h1>Add new Car</h1>
+
+<form (ngSubmit)="addCar(car)">
+
+	<div class="form-group">
+    	<label>Mark:</label>
+    	<input [(ngModel)]="car.mark" type="text" name="mark" class="form-control" required minlength="2">
+    </div>
+
+    <div class="form-group">
+    	<label>Model:</label>
+    	<input [(ngModel)]="car.model" type="text" name="model" class="form-control" required minlength="2">
+    </div>
+
+    <div class="form-group">
+    	<label>Year:</label>
+    	<select [(ngModel)]="car.year" type="number" name="year" class="form-control" required>
+		  <option *ngFor="let year of years">{{ year }}</option>
+		</select>
+    </div>
+
+    <div class="form-group">
+    	<label>Max speed:</label>
+    	<input [(ngModel)]="car.maxSpeed" type="number" name="maxSpeed" class="form-control" required>
+    </div>
+
+    <div class="form-group">
+    	<label>Automatic:</label>
+    	<input 
+    		[(ngModel)]="car.isAutomatic" 
+    		type="checkbox" 
+    		name="isAutomatic" 
+    		value="true" 
+    		class="form-control">
+    		Yes
+    </div>
+
+    <div class="form-group">
+
+    	<label>Engine:</label>
+    	<input [(ngModel)]="car.engine" type="radio" name="engine" class="form-control" value="diesel" checked required>diesel
+    	<br>
+
+    	<input [(ngModel)]="car.engine" type="radio" name="engine" class="form-control" value="petrol" checked required>petrol
+    	<br>
+
+    	<input [(ngModel)]="car.engine" type="radio" name="engine" class="form-control" value="electric" checked required>electric
+    	<br>
+
+    	<input [(ngModel)]="car.engine" type="radio" name="engine" class="form-control" value="hybrid" checked required>hybrid
+    	<br>
+
+    </div>
+
+    <div class="form-group">
+    	<label>Number of doors:</label>
+    	<input [(ngModel)]="car.numberOfDoors" type="number" name="numberOfDoors" class="form-control" required>
+    </div>
+  
+    <div class="input-group col-md-5 pl-0 my-lg-4 my-2">
+    	<button type="submit" 
+	        class="btn btn-primary">
+	        Add car
+    	</button>
+  </div>
+</form>

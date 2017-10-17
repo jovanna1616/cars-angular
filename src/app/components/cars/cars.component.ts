@@ -11,11 +11,13 @@ export class CarsComponent implements OnInit {
 
 
 	cars: Array<Car>;
+	car: Array<Car>;
 
   constructor(private carsService: CarsService) {
 		this.cars = carsService.getCars();
-
 	}
+
+	
 
   ngOnInit() {
   }

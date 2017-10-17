@@ -7,15 +7,20 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { CarsComponent } from './components/cars/cars.component';
 import { CarsService } from './shared/services/cars.service';
+import { CarFormComponent } from './components/car-form/car-form.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
     LayoutComponent,
-    CarsComponent
+    CarsComponent,
+    CarFormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
   ],
   exports: [
   	LayoutComponent,
