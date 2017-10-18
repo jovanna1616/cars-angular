@@ -31,9 +31,19 @@ export class CarFormComponent implements OnInit {
 
 	}
 
-
-   
-
+	previewCar(car) {
+		alert(
+      [
+      	car.mark,
+      	car.model,
+      	car.year,
+      	car.maxSpeed,
+      	car.isAutomatic,
+      	car.engine,
+      	car.numberOfDoors
+      ]
+    );
+	}
 	
   ngOnInit() {
   }
