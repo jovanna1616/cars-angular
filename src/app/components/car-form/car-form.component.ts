@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Car } from '../../shared/models/car.model';
 import { CarsService } from '../../shared/services/cars.service';
 import { Router } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 
 @Component({
@@ -16,6 +17,7 @@ export class CarFormComponent implements OnInit {
 	car: Car = new Car();
 
 	years = Array(28).fill(0).map((e, i) => i + 1990);
+	speed = Array(280).fill(0).map((e, i) => i + 20)
 
   constructor(private carsService: CarsService, private router: Router) {
 		this.cars = carsService.getCars();
@@ -26,7 +28,6 @@ export class CarFormComponent implements OnInit {
 	addCar(car: Car) {
 
 		this.carsService.addCar(car);
-		console.log('ggggggg');
 		this.router.navigate(['/cars']);
 
 	}

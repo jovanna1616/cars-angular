@@ -1,28 +1,77 @@
 <h1>Add new Car</h1>
 
-<form #carForm ="ngForm" (ngSubmit)="addCar(car)">
+<form #carForm ="ngForm" (ngSubmit)="addCar(car); carForm.reset()">
 
 	<div class="form-group">
     	<label>Mark:</label>
-    	<input [(ngModel)]="car.mark" type="text" name="mark" class="form-control" required minlength="2">
+    	<input #mark="ngModel" [(ngModel)]="car.mark" type="text" name="mark" class="form-control" required minlength="2">
+
+        <div *ngIf="mark.invalid && (mark.dirty || mark.touched)"
+        class="alert alert-danger">
+            <div *ngIf="mark.errors.required">
+                Mark is required.
+            </div>
+            <div *ngIf="mark.errors.minlength">
+                Mark must be at least 2 characters long.
+            </div>
+        </div>
+
     </div>
 
     <div class="form-group">
     	<label>Model:</label>
-    	<input [(ngModel)]="car.model" type="text" name="model" class="form-control" required minlength="2">
+    	<input #model="ngModel" [(ngModel)]="car.model" type="text" name="model" class="form-control" required minlength="2">
+
+        <div *ngIf="model.invalid && (model.dirty || model.touched)"
+        class="alert alert-danger">
+            <div *ngIf="model.errors.required">
+                Model is required.
+            </div>
+            <div *ngIf="model.errors.minlength">
+                Model must be at least 2 characters long.
+            </div>
+        </div>
+
     </div>
 
     <div class="form-group">
     	<label>Year:</label>
-    	<select [(ngModel)]="car.year" type="number" name="year" class="form-control" required>
+    	<select #year="ngModel" [(ngModel)]="car.year" type="number" name="year" class="form-control" required>
 		  <option *ngFor="let year of years">{{ year }}</option>
 		</select>
+
+        <div *ngIf="year.invalid && (year.dirty || year.touched)"
+        class="alert alert-danger">
+            <div *ngIf="year.errors.required">
+                Year is required.
+            </div>
+        </div>
+        
     </div>
 
     <div class="form-group">
     	<label>Max speed:</label>
-    	<input [(ngModel)]="car.maxSpeed" type="number" name="maxSpeed" class="form-control" required>
+    	<input 
+        #maxSpeed="ngModel" 
+        [(ngModel)]="car.maxSpeed" 
+        type="number" 
+        [min]="20" 
+        [max]="300"  
+        name="maxSpeed" 
+        class="form-control">
+
+        <div *ngIf="maxSpeed.invalid && maxSpeed.touched" class="alert alert-danger">
+            <div *ngIf="maxSpeed.errors.min">
+                Minimum speed is 20
+            </div>
+            <div *ngIf="maxSpeed.errors.max">
+                Maximum speed is 300
+            </div>
+        </div>
+
     </div>
+
+    
 
     <div class="form-group">
     	<label>Automatic:</label>
@@ -31,30 +80,45 @@
     		type="checkbox" 
     		name="isAutomatic" 
     		value="true" 
-    		class="form-control">
+    		class="form-control"
+            required>
     		Yes
     </div>
 
     <div class="form-group">
 
     	<label>Engine:</label>
-    	<input [(ngModel)]="car.engine" type="radio" name="engine" class="form-control" value="diesel" checked required>diesel
+    	<input [(ngModel)]="car.engine" type="radio" name="engine" class="form-control" value="diesel" required>diesel
     	<br>
 
-    	<input [(ngModel)]="car.engine" type="radio" name="engine" class="form-control" value="petrol" checked required>petrol
+    	<input [(ngModel)]="car.engine" type="radio" name="engine" class="form-control" value="petrol" required>petrol
     	<br>
 
-    	<input [(ngModel)]="car.engine" type="radio" name="engine" class="form-control" value="electric" checked required>electric
+    	<input [(ngModel)]="car.engine" type="radio" name="engine" class="form-control" value="electric" required>electric
     	<br>
 
-    	<input [(ngModel)]="car.engine" type="radio" name="engine" class="form-control" value="hybrid" checked required>hybrid
+    	<input [(ngModel)]="car.engine" type="radio" name="engine" class="form-control" value="hybrid" required>hybrid
     	<br>
 
     </div>
 
     <div class="form-group">
     	<label>Number of doors:</label>
-    	<input [(ngModel)]="car.numberOfDoors" type="number" name="numberOfDoors" class="form-control" required>
+    	<input #numberOfDoors="ngModel" [(ngModel)]="car.numberOfDoors" type="number" [min]="2" [max]="5" name="numberOfDoors" class="form-control" required>
+
+        <div *ngIf="numberOfDoors.invalid && numberOfDoors.touched"
+        class="alert alert-danger">
+            <div *ngIf="numberOfDoors.errors.required">
+                Number of doors is required.
+            </div>
+            <div *ngIf="numberOfDoors.errors.min">
+                Number of doors must be at least 2.
+            </div>
+            <div *ngIf="numberOfDoors.errors.max">
+                Number of doors must be maximum 5.
+            </div>
+        </div>
+
     </div>
 
     <button type="button" class="btn"
@@ -69,8 +133,10 @@
     </button>
   
     <div class="input-group col-md-5 pl-0 my-lg-4 my-2">
-    	<button type="submit" 
-	        class="btn btn-primary">
+    	<button 
+        [disabled]="!carForm.valid"
+        type="submit" 
+        class="btn btn-primary">
 	        Add car
     	</button>
   </div>
