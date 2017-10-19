@@ -4,15 +4,16 @@ import { Car } from '../models/car.model';
 @Injectable()
 export class CarsService {
 
-	private idCount = 5;
+	private idCount = 6;
 	private car: Array<Car>;
+	private newCar: Car = new Car();
 	private cars: Array<Car> = [
 
-		new Car(0, 'toyota', 'yaris', '2015', 240, true, 'diesel', 5),
-		new Car(1, 'peugeot', '407', '2014', 220, true, 'petrol', 5),
-		new Car(2, 'zastava', 'fiat', '2013', 180, true, 'electric', 5),
-		new Car(3, 'mercedes', 'S', '2012', 240, true, 'hybrid', 5),
-		new Car(4, 'citroen', 'model1', '2016', 210, true, 'diesel', 3),
+		new Car(1, 'toyota', 'yaris', '2015', 240, true, 'diesel', 5),
+		new Car(2, 'peugeot', '407', '2014', 220, true, 'petrol', 5),
+		new Car(3, 'zastava', 'fiat', '2013', 180, true, 'electric', 5),
+		new Car(4, 'mercedes', 'S', '2012', 240, true, 'hybrid', 5),
+		new Car(5, 'citroen', 'model1', '2016', 210, true, 'diesel', 3),
 
 	];
 
@@ -50,7 +51,9 @@ export class CarsService {
 	}
 
 	public editCar(car: Car) {
-		this.cars.splice(this.cars.indexOf(car), 1, car);
+		this.newCar = Object.assign({}, car);
+		this.cars.splice(this.cars.indexOf(car), 1, this.newCar);
+
 	}
 
   constructor() { }
