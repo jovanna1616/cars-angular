@@ -1,6 +1,6 @@
 <h1>Add new Car</h1>
 
-<form #carForm ="ngForm" (ngSubmit)="addCar(car); carForm.reset()">
+<form #carForm ="ngForm" (ngSubmit)="submit(car); carForm.reset()">
 
 	<div class="form-group">
     	<label>Mark:</label>
@@ -40,7 +40,7 @@
 		  <option *ngFor="let year of years">{{ year }}</option>
 		</select>
 
-        <div *ngIf="year.invalid && (year.dirty || year.touched)"
+        <div *ngIf="year.invalid && year.touched"
         class="alert alert-danger">
             <div *ngIf="year.errors.required">
                 Year is required.
@@ -60,22 +60,20 @@
         name="maxSpeed" 
         class="form-control">
 
-        <div *ngIf="maxSpeed.invalid && maxSpeed.touched" class="alert alert-danger">
+        <div *ngIf="maxSpeed.invalid && maxSpeed.dirty" class="alert alert-danger">
             <div *ngIf="maxSpeed.errors.min">
                 Minimum speed is 20
             </div>
             <div *ngIf="maxSpeed.errors.max">
-                Maximum speed is 300
+                Maximum speed is 30
             </div>
         </div>
-
     </div>
-
-    
 
     <div class="form-group">
     	<label>Automatic:</label>
-    	<input 
+    	<input
+            #automatic="ngModel" 
     		[(ngModel)]="car.isAutomatic" 
     		type="checkbox" 
     		name="isAutomatic" 
@@ -129,7 +127,7 @@
 
     <button type="button" class="btn"
         (click)="previewCar(car)">
-        Prewiew
+        Preview
     </button>
   
     <div class="input-group col-md-5 pl-0 my-lg-4 my-2">
@@ -137,7 +135,7 @@
         [disabled]="!carForm.valid"
         type="submit" 
         class="btn btn-primary">
-	        Add car
+	        {{ car.id ? "Edit" : "Add car" }}
     	</button>
   </div>
 </form>
